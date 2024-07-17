@@ -1,0 +1,33 @@
+.lii {
+    padding: 4px 8px;
+    text-transform: none;
+    border: 1px solid #555;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 50px;
+    word-wrap: break-word;
+    min-width: 900px;
+}
+
+.lii .btnDel {
+    padding: 5px 10px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1100px) {
+    .lii {
+        min-width: 500px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .lii {
+        min-width: 300px; /* Дополнительная настройка для меньших экранов */
+    }
+}

@@ -1,0 +1,40 @@
+/* Nav */
+.logo-text {
+    color: #f9532d;
+}
+
+.page-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    box-shadow: 0 4px 17px rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.logo {
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 800;
+    opacity: 0;
+    animation: leftSideAni 1s ease forwards;
+}
+
+.logo a {
+    color: #f9532d;
+    text-decoration: none;
+}
+
+@keyframes leftSideAni {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
