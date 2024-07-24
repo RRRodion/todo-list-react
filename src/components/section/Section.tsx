@@ -5,41 +5,35 @@ import TaskItem, {Item} from "./TaskItem";
 
 const Section: React.FC = () => {
     const [tasks, setTasks] = useState<Item[]>([]);
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
 
-    // Функция для загрузки задач из localStorage
     const loadTasksFromLocalStorage = (): Item[] => {
         try {
             const savedTasks = localStorage.getItem('tasks');
-            console.log('Загруженные задачи из localStorage:', savedTasks);
             return savedTasks ? JSON.parse(savedTasks) : [];
         } catch (error) {
-            console.error('Ошибка при загрузке задач из localStorage:', error);
             return [];
         }
     };
 
-    // Функция для сохранения задач в localStorage
     const saveTasksToLocalStorage = (tasks: Item[]) => {
         try {
-            console.log('Сохранение задач в localStorage:', tasks);
             localStorage.setItem('tasks', JSON.stringify(tasks));
         } catch (error) {
-            console.error('Ошибка при сохранении задач в localStorage:', error);
         }
     };
 
-    // Загрузка задач при первой загрузке компонента
     useEffect(() => {
         const storedTasks = loadTasksFromLocalStorage();
         setTasks(storedTasks);
+        setIsInitialLoad(false);
     }, []);
 
-    // Сохранение задач при каждом изменении состояния tasks
     useEffect(() => {
-        if (tasks.length > 0) {
+        if (!isInitialLoad) {
             saveTasksToLocalStorage(tasks);
         }
-    }, [tasks]);
+    }, [tasks, isInitialLoad]);
 
     const handleTaskDelete = (id: Item['id']) => {
         const updatedTasks = tasks.filter(task => task.id !== id);
@@ -51,7 +45,6 @@ const Section: React.FC = () => {
         const newTask = {id: newId, title, completed: false};
         const updatedTasks = [...tasks, newTask];
         setTasks(updatedTasks);
-        console.log('Добавленная задача:', newTask);
     };
 
     const handleTaskComplete = (id: Item['id']) => {
@@ -68,7 +61,7 @@ const Section: React.FC = () => {
         <section className="container">
             <Input onAddTask={handleAddTask}/>
             <div className="wrap">
-                {incompleteTasks.length <= 0 && (
+                {incompleteTasks.length === 0 && (
                     <div className="text">No Tasks</div>
                 )}
                 <ul id="result">
@@ -83,7 +76,7 @@ const Section: React.FC = () => {
                 </ul>
             </div>
             <hr/>
-            {completedTasks.length <= 0 && (
+            {completedTasks.length === 0 && (
                 <div className="text2">No Completed Tasks</div>
             )}
             <ul id="completed">

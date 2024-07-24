@@ -13,7 +13,7 @@ interface TaskItemProps {
     onComplete: (id: Item['id']) => void;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onComplete }) => {
+const TaskItem = ({ task, onDelete, onComplete }:TaskItemProps) => {
     return (
         <li className="lii">
             <input
