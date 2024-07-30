@@ -5,7 +5,7 @@ interface InputProps {
     onAddTask: (title: string) => void;
 }
 
-const Input: React.FC<InputProps> = ({ onAddTask }) => {
+const Input = ({ onAddTask }:InputProps) => {
     const [value, setValue] = useState("");
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {

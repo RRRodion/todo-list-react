@@ -2,26 +2,11 @@ import React, {useState, useEffect} from 'react';
 import "./section.css";
 import Input from "../input/Input";
 import TaskItem, {Item} from "./TaskItem";
+import {loadTasksFromLocalStorage, saveTasksToLocalStorage} from "../../utils";
 
-const Section: React.FC = () => {
+const Section = () => {
     const [tasks, setTasks] = useState<Item[]>([]);
     const [isInitialLoad, setIsInitialLoad] = useState(true);
-
-    const loadTasksFromLocalStorage = (): Item[] => {
-        try {
-            const savedTasks = localStorage.getItem('tasks');
-            return savedTasks ? JSON.parse(savedTasks) : [];
-        } catch (error) {
-            return [];
-        }
-    };
-
-    const saveTasksToLocalStorage = (tasks: Item[]) => {
-        try {
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-        } catch (error) {
-        }
-    };
 
     useEffect(() => {
         const storedTasks = loadTasksFromLocalStorage();
